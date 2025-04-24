@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'redak.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Редактировать профиль</h2>
+        <form method='post' enctype= multipart/form-data>
+            {% csrf_token %}
+            <div class="form-group center">
+                <label>Аватар</label>
+                <div class="avatar-preview"
+                     style="background-image: url('{%if user.image%} {{request.user.image.url}} {%else%} https://via.placeholder.com/100 {%endif%}')"></div>
+                {{ form.image }}
+            </div>
+            <div class="form-row">
+                <div class="form-group half">
+                    <label>Имя</label>
+                    {{ form.first_name }}
+                </div>
+                <div class="form-group half">
+                    <label>Фамилия</label>
+                    {{ form.last_name }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Почта</label>
+                {{ form.email }}
+            </div>
+            <div class="form-row">
+                <div class="form-group half">
+                    <label>Новый пароль</label>
+                    {{ form.password }}
+                </div>
+            </div>
+            <button type="submit">Сохранить</button>
+        </form>
+    </div>
+{% endblock %}

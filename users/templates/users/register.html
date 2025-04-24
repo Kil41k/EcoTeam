@@ -1,0 +1,49 @@
+{%extends 'main/base.html'%}
+{%load static%}
+{%block css%}
+  <link rel="stylesheet" href="{%static 'style.css'%}" />
+  <link rel="stylesheet" href="{%static 'register.css'%}" />
+{%endblock%}
+{%block content%}
+  <form class="register-form" method="post">
+    {%csrf_token%}
+    <h2>Регистрация | EcoTeam</h2>
+    
+    <div class="row">
+        <div class="form-group">
+            <label for="{{form.first_name.id_for_label}}">Имя</label>
+            {{form.first_name}}
+        </div>
+        <div class="form-group">
+            <label for="{{form.last_name.id_for_label}}">Фамилия</label>
+            {{form.last_name}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <label for="{{form.email.id_for_label}}">Эл. почта</label>
+            {{form.email}}
+        </div>
+        <div class="form-group">
+            <label for="{{form.username.id_for_label}}">Логин</label>
+            {{form.username}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <label for="{{form.password1.id_for_label}}">Пароль</label>
+            {{form.password1}}
+        </div>
+        <div class="form-group">
+            <label for="{{form.password2.id_for_label}}">Пароль ещё раз</label>
+            {{form.password2}}
+        </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Зарегистрироваться</button>
+
+    <p class="form-link">Уже есть аккаунт? <a href="{%url 'login'%}">Войти</a></p>
+</form>
+  {%endblock%}

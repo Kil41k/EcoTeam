@@ -1,0 +1,128 @@
+.team-detail-page {
+    padding: 20px;
+    font-family: sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.team-cover img {
+    width: 100%;
+    border-radius: 12px;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.team-content h2 {
+    margin-top: 20px;
+    font-size: 28px;
+}
+
+.team-content p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.team-members {
+    margin-top: 30px;
+}
+
+.avatars {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatars img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.avatars span {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.join-btn {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #3ccf91;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.join-btn:hover {
+    background-color: #34b07c;
+}
+
+.chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    background-color: #f2f2f2;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 99;
+}
+
+.chat-header {
+    background-color: #3ccf91;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.chat-messages {
+    padding: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+.chat-messages p {
+    margin: 5px 0;
+}
+
+.chat-input-wrapper {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    padding: 8px;
+    background-color: #f9f9f9;
+}
+
+.chat-input {
+    flex-grow: 1;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    background-color: #eee;
+    margin-right: 8px;
+    outline: none;
+    font-size: 14px;
+}
+
+.send-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.send-icon {
+    width: 24px;
+    height: 24px;
+}

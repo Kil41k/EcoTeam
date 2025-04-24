@@ -1,0 +1,43 @@
+{%extends 'main/base.html'%}
+{%load static%}
+{%block css%}
+  <link rel="stylesheet" href="{%static 'profile.css'%}"/>
+  <link rel="stylesheet" href="{%static 'style.css'%}">
+{%endblock%}
+{%block content%}
+      <div class="profile-container">
+        <div class="profile-card">
+          <img src="{%if request.user.image%} {{request.user.image.url}} {%else%} {%static 'defaultuser.jpg'%} {%endif%}" alt="User Photo" class="profile-photo">
+          <div class="profile-info">
+            <h2>{{user.first_name}} {{user.last_name}}</h2>
+            <p><strong>Почта:</strong> {{user.email}}</p>
+            <p><strong>Логин:</strong> {{user.username}}</p>
+            <a href="{%url 'redak'%}"><button class="join-button">Редактировать</button></a>
+          </div>
+        </div>
+      
+        <!-- Новый блок проектов -->
+        <div class="projects-list">
+          <h3>📁 Завершённые проекты</h3>
+          {%for cproj in completed%}
+          <div class="project-item">
+            <h4>{{cproj.title}}</h4>
+            <p>{{cproj.description}}</p>
+          </div>
+          {%endfor%}
+        </div>
+        <div class="projects-list">
+          <h3>📁 Не завершённые проекты</h3>
+          {%for aproj in active%}
+          <div class="project-item">
+            <h4>{{aproj.title}}</h4>
+            <p>{{aproj.description}}</p>
+            <a  href="{%url 'about' aproj.id%}"><button class="details-btn">Подробнее</button></a>
+            {%if aproj.user == request.user%}
+            <a href="{%url 'completeproj' aproj.id%}" ><button class="details-btn">Завершить проект</button></a>
+            {%endif%}
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+{%endblock%}

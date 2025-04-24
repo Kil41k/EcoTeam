@@ -1,0 +1,30 @@
+{%extends 'main/base.html'%}
+{%load static%}
+{%block css%}
+  <link rel="stylesheet" href="{%static 'style.css'%}" />
+  <link rel="stylesheet" href="{%static 'register.css'%}" />
+{%endblock%}
+{%block content%}
+    <form class="register-form" method="post">
+        {%csrf_token%}
+        <h2>Вход | EcoTeam </h2>
+
+        <div class="row">
+            <div class="form-group" style="flex: 1;">
+                <label for="{{form.username.id_for_label}}">Логин</label>
+                {{form.username}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group" style="flex: 1;">
+                <label for="{{form.password.id_for_label}}">Пароль</label>
+                {{form.password}}
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Войти</button>
+
+        <p class="form-link">Нет аккаунта? <a href="register.html">Зарегистрироваться</a></p>
+    </form>
+{%endblock%}

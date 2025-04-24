@@ -1,0 +1,41 @@
+{%extends 'main/base.html'%}
+{%load static%}
+{%block content%}
+<div class="main-container">
+    <!-- Сайдбар -->
+    <aside class="sidebar">
+      <h3>Категории</h3>
+      {% for cat in cats %}
+          <a class="category" href="{% url 'category' cat.id %}">{{ cat.title }}</a>
+      {% endfor %}
+    </aside>
+
+    <!-- Контент -->
+    <main class="content">
+      <section class="hero">
+        <h1>Создай команду для экологических проектов</h1>
+        <p>Присоединяйся к людям, которые хотят менять мир к лучшему</p>
+        <a class="nav-link" href="{%url 'create'%}"><button>Создать команду</button></a>
+      </section>
+
+      <section class="projects">
+        <h2>Активные проекты</h2>
+        {%for proj in projs%}
+        <div class="project-card">
+          <img src="{{proj.image.url}}" alt="Project Image" />
+          <div class="project-info">
+            <div>
+              <h3>{{proj.title}}</h3>
+              <p>{{proj.description}}</p>
+            </div>
+            <div>
+              <a href="{%url 'about' proj.id%}"><button class="join-button">Подробнее</button></a>
+              <div class="participant-count">Участников: {{proj.participants.count}}</div>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      </section>
+    </main>
+  </div>
+{%endblock%}
