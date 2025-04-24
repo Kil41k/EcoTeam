@@ -7,12 +7,14 @@
 {%block content%}
       <div class="profile-container">
         <div class="profile-card">
-          <img src="{%if request.user.image%} {{request.user.image.url}} {%else%} {%static 'defaultuser.jpg'%} {%endif%}" alt="User Photo" class="profile-photo">
+          <img src="{%if request.user.image%} {{user.image.url}} {%else%} {%static 'defaultuser.jpg'%} {%endif%}" alt="User Photo" class="profile-photo">
           <div class="profile-info">
             <h2>{{user.first_name}} {{user.last_name}}</h2>
             <p><strong>Почта:</strong> {{user.email}}</p>
             <p><strong>Логин:</strong> {{user.username}}</p>
+            {%if user == request.user%}
             <a href="{%url 'redak'%}"><button class="join-button">Редактировать</button></a>
+            {%endif%}
           </div>
         </div>
       

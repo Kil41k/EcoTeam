@@ -1,10 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CreateForm, CommentSend
 from .models import Projects, Category, Comment
 
 
 def indexview(request):
-    projs = Projects.objects.all()
+    projs = Projects.objects.filter(is_completed=False)
     cats = Category.objects.all()
     context = {'projs': projs, 'cats': cats, 'title': 'Главная страница | EcoTeam'}
     return render(request, 'main/index.html', context)
@@ -13,11 +14,12 @@ def category(request, cat_id):
     cat = get_object_or_404(Category, id=cat_id)
     context = {
         'title': 'Категория | EcoTeam',
-        'projs': Projects.objects.filter(category=cat),
+        'projs': Projects.objects.filter(category=cat, is_completed=False),
         'cats': Category.objects.all()
     }
     return render(request, 'main/index.html', context)
 
+@login_required
 def about(request, proj_id):
     proj = get_object_or_404(Projects, id=proj_id)
     comments = Comment.objects.filter(proj=proj)
