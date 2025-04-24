@@ -8,32 +8,40 @@ from django.contrib.auth import login, logout
 from .models import User
 
 def register(request):
+    err = None
     if request.method == 'POST':
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
             return redirect('index')
+        else:
+            err = form.errors
     else:
         form = UserRegistrationForm
-    return render(request, 'users/register.html', {'form': form, 'title': 'Регистрация | EcoTeam'})
+    return render(request, 'users/register.html', {'form': form, 'title': 'Регистрация | EcoTeam', 'errors': err})
 
 
 def user_login(request):
+    err = None
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
             return redirect('index')
+        else:
+            err = form.errors
     else:
         form = AuthenticationForm()
 
     return render(request, 'users/login.html', {
         'form': form,
-        'title': 'Вход | EcoTeam'
+        'title': 'Вход | EcoTeam',
+        'errors': err
     })
 
 def userChangeView(request):
+    err = None
     if request.method == 'POST':
         form = UserChangeData(data=request.POST, files=request.FILES, instance=request.user)
         if form.is_valid():
@@ -41,13 +49,15 @@ def userChangeView(request):
             user.set_password(form.cleaned_data['password'])
             user.save()
             return redirect('index')
+        else:
+            err = form.errors
     else:
         form = UserChangeData(instance=request.user)
-    return render(request, 'users/redak.html', {'form': form, 'title': 'Редактирование профиля | EcoTeam'})
+    return render(request, 'users/redak.html', {'form': form, 'title': 'Редактирование профиля | EcoTeam', 'errors': err})
             
 
 def logoutview(request):
-    logout(request.user)
+    logout(request)
     return redirect('index')
 
 def profile(request, user_id):

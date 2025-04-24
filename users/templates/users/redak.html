@@ -7,6 +7,11 @@
 {% block content %}
     <div class="container">
         <h2>Редактировать профиль</h2>
+        {%if errors%}
+    <div  class="error-box">
+      <span id="error-text">{{errors}}</span>
+    </div>
+    {%endif%}
         <form method='post' enctype= multipart/form-data>
             {% csrf_token %}
             <div class="form-group center">

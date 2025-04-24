@@ -8,7 +8,11 @@
       <div class="container">
         <div class="card">
           <h2>Создание Eco-проекта</h2>
-    
+          {%if errors%}
+          <div  class="error-box">
+            <span id="error-text">{{errors}}</span>
+          </div>
+          {%endif%}
           <form class="project-form" enctype="multipart/form-data" method="post">
             {%csrf_token%}
             <div class="form-group">

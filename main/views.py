@@ -50,6 +50,7 @@ def joinproj(request, proj_id):
     return redirect('about', proj_id)
 
 def create(request):
+    err = None
     if request.method == 'POST':
         form = CreateForm(data=request.POST, files=request.FILES)
         if form.is_valid():
@@ -59,7 +60,7 @@ def create(request):
             proj.participants.add(request.user)
             return redirect('index')
         else:
-            print(form.errors)
+            err = form.errors
     else:
         form = CreateForm
-    return render(request, 'main/create.html', {'form': form, 'title': 'Создание проекта | EcoTeam'})
+    return render(request, 'main/create.html', {'form': form, 'title': 'Создание проекта | EcoTeam', 'errors': err})

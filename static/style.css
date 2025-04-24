@@ -115,7 +115,20 @@
     padding: 120px 40px 40px;
     width: 100%;
   }
-  
+
+  .error-box {
+  background-color: #ffe0e0;
+  border: 1px solid #ff4d4d;
+  color: #b00020;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
   .hero {
     background-color: #dcedc8;
     padding: 40px 30px;

@@ -8,7 +8,11 @@
   <form class="register-form" method="post">
     {%csrf_token%}
     <h2>Регистрация | EcoTeam</h2>
-    
+    {%if errors%}
+    <div  class="error-box">
+      <span id="error-text">{{errors}}</span>
+    </div>
+    {%endif%}
     <div class="row">
         <div class="form-group">
             <label for="{{form.first_name.id_for_label}}">Имя</label>
