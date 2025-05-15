@@ -8,8 +8,6 @@
 body {
   background-color: #f2f2f2;
 }
-
-/* Шапка */
 header {
   display: flex;
   justify-content: space-between;
@@ -30,13 +28,12 @@ header a {
   font-weight: bold;
 }
 
-/* Контейнер чата */
 .chat-container {
   display: flex;
   height: calc(100vh - 60px);
 }
 
-/* Сайдбар */
+
 .sidebar {
   width: 250px;
   background-color: #fff;
@@ -68,7 +65,7 @@ header a {
   background-color: #f0f0f0;
 }
 
-/* Основное окно чата */
+
 .chat-box {
   flex-grow: 1;
   display: flex;
@@ -90,7 +87,6 @@ header a {
   margin-bottom: 10px;
 }
 
-/* Область ввода */
 .input-area {
   display: flex;
   gap: 10px;

@@ -7,6 +7,14 @@
       {% for cat in cats %}
           <a class="category" href="{% url 'category' cat.id %}">{{ cat.title }}</a>
       {% endfor %}
+
+      <h3 class="city-heading">По городам</h3>
+        <a class="category city-category" href="?city=Актау">Жаркент</a>
+        <a class="category city-category" href="?city=Алматы">Алматы</a>
+        <a class="category city-category" href="?city=Астана">Астана</a>
+        <a class="category city-category" href="?city=Шымкент">Шымкент</a>
+        <a class="category city-category" href="?city=Караганда">Караганда</a>
+        
     </aside>
 
     {% if query %}
