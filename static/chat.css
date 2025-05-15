@@ -1,0 +1,117 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #f2f2f2;
+}
+
+/* Шапка */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #228B22;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+header a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* Контейнер чата */
+.chat-container {
+  display: flex;
+  height: calc(100vh - 60px);
+}
+
+/* Сайдбар */
+.sidebar {
+  width: 250px;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.chat-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-btn {
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  padding: 10px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.chat-btn:hover,
+.chat-btn.active {
+  background-color: #f0f0f0;
+}
+
+/* Основное окно чата */
+.chat-box {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+#chat-title {
+  margin-bottom: 10px;
+  font-size: 1.3em;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+/* Область ввода */
+.input-area {
+  display: flex;
+  gap: 10px;
+}
+
+#message-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+#send-button {
+  padding: 10px 15px;
+  background-color: #228B22;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#send-button:hover {
+  background-color: #1e7a1e;
+}

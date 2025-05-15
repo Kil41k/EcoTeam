@@ -2,12 +2,18 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CreateForm, CommentSend
 from .models import Projects, Category, Comment
+from users.models import User
 
 
 def indexview(request):
     projs = Projects.objects.filter(is_completed=False)
     cats = Category.objects.all()
-    context = {'projs': projs, 'cats': cats, 'title': 'Главная страница | EcoTeam'}
+    query = request.GET.get('q', '')  # получаем параметр q из GET-запроса
+    users = User.objects.none()  # пустой QuerySet по умолчанию
+
+    if query:
+        users = User.objects.filter(username__icontains=query)
+    context = {'projs': projs, 'cats': cats, 'title': 'Главная страница | EcoTeam', 'users': users, 'query': query}
     return render(request, 'main/index.html', context)
 
 def category(request, cat_id):

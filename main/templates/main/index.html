@@ -9,6 +9,24 @@
           <a class="category" href="{% url 'category' cat.id %}">{{ cat.title }}</a>
       {% endfor %}
     </aside>
+  <form method="GET" action="{% url 'index' %}">
+  <input type="text" name="q" placeholder="Поиск пользователей по username" value="{{ request.GET.q }}">
+  <button type="submit">Поиск</button>
+</form>
+
+  {% if query %}
+  <h2>Результаты поиска по "{{ query }}":</h2>
+  {% if users.exists %}
+    <ul>
+      {% for user in users %}
+        <li><a href="{%url 'profile' user.id%}">{{ user.username }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Пользователи не найдены.</p>
+  {% endif %}
+{% endif %}
+
 
     <!-- Контент -->
     <main class="content">

@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoTeam Чат</title>
+  <link rel="stylesheet" href="{% static 'chat.css' %}" />
+</head>
+<body>
+  <header>
+    <div class="nav-left">
+      <a href="#">Форум</a>
+      <a href="#">Создать команду</a>
+    </div>
+    <div class="logo">EcoTeam</div>
+    <div class="nav-right">
+      <a href="#">Зарегистрироваться</a>
+      <a href="#">Профиль</a>
+    </div>
+  </header>
+
+  <main class="chat-container">
+    <aside class="sidebar">
+      <h2>Чаты</h2>
+      <div class="chat-list">
+        <button class="chat-btn active" data-chat="group">🌿 Группа: Эко-проект</button>
+        <button class="chat-btn" data-chat="user">👤 Личный чат: Алия</button>
+      </div>
+    </aside>
+
+    <section class="chat-box">
+      <h3 id="chat-title">🌿 Группа: Эко-проект</h3>
+      <div id="chat-messages" class="chat-messages">
+        <!-- Сообщения будут отображаться здесь -->
+      </div>
+      <div class="input-area">
+        <input id="message-input" type="text" placeholder="Введите сообщение..." />
+        <button id="send-button">📨</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="{% static 'chat.js' %}"></script>
+</body>
+</html>
