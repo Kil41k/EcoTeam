@@ -2,39 +2,48 @@
 {%load static%}
 {%block content%}
 <div class="main-container">
-    <!-- Сайдбар -->
     <aside class="sidebar">
       <h3>Категории</h3>
       {% for cat in cats %}
           <a class="category" href="{% url 'category' cat.id %}">{{ cat.title }}</a>
       {% endfor %}
     </aside>
-  <form method="GET" action="{% url 'index' %}">
-  <input type="text" name="q" placeholder="Поиск пользователей по username" value="{{ request.GET.q }}">
-  <button type="submit">Поиск</button>
-</form>
 
-  {% if query %}
-  <h2>Результаты поиска по "{{ query }}":</h2>
-  {% if users.exists %}
-    <ul>
-      {% for user in users %}
-        <li><a href="{%url 'profile' user.id%}">{{ user.username }}</a></li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>Пользователи не найдены.</p>
+    {% if query %}
+    <h2 class="search-heading">Результаты поиска по "{{ query }}":</h2>
+    {% if users.exists %}
+      <div class="user-card-container">
+        {% for user in users %}
+          <a href="{% url 'profile' user.id %}" class="user-card">
+            <img src="{{ user.profile.avatar.url }}" alt="Аватар {{ user.username }}" class="user-avatar">
+            <div class="user-info">
+              <p class="user-name">{{ user.username }}</p>
+              <p class="user-role">Участник сообщества</p>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="no-results">Пользователи не найдены.</p>
+    {% endif %}
   {% endif %}
-{% endif %}
+  
 
-
-    <!-- Контент -->
     <main class="content">
       <section class="hero">
         <h1>Создай команду для экологических проектов</h1>
         <p>Присоединяйся к людям, которые хотят менять мир к лучшему</p>
         <a class="nav-link" href="{%url 'create'%}"><button>Создать команду</button></a>
       </section>
+
+      <form method="GET" action="{% url 'index' %}">
+        <section class="search-section">
+          <div class="search-container">
+            <input type="text" id="searchInput" placeholder="🔍 Поиск по именам" value="{{ request.GET.q }}" />
+            <button id="searchBtn" aria-label="Поиск"> Поиск </button>
+          </div>
+        </section>
+      </form>
 
       <section class="projects">
         <h2>Активные проекты</h2>
