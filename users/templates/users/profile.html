@@ -12,6 +12,8 @@
             <h2>{{user.first_name}} {{user.last_name}}</h2>
             <p><strong>Почта:</strong> {{user.email}}</p>
             <p><strong>Логин:</strong> {{user.username}}</p>
+                  <a class="nav-link" href="{%url 'chat' user.username%}">Написать</a>
+
             {%if user == request.user%}
             <a href="{%url 'redak'%}"><button class="join-button">Редактировать</button></a>
             {%endif%}
