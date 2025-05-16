@@ -1,63 +1,65 @@
-// Пример подключения к WebSocket, roomName можно передавать из шаблона Django
-const roomName = "eco_project"; // Если есть динамический параметр, замените на: "{{ room_name }}"
-const userName = "Guest";       // Если пользователь авторизован, можно передать имя пользователя из Django
+document.addEventListener("DOMContentLoaded", function () {
+    let chatSocket;
+    let currentRoom = "group"; // Значение по умолчанию
+    const userName = "Guest";
 
-const chatSocket = new WebSocket(
-    'ws://' + window.location.host + '/ws/chat/' + roomName + '/'
-);
+    function connectToRoom(roomName) {
+        if (chatSocket) {
+            chatSocket.close();
+        }
 
-chatSocket.onmessage = function(e) {
-    const data = JSON.parse(e.data);
-    displayMessage(data.sender, data.message); // Важно!
-};
+        chatSocket = new WebSocket("ws://" + window.location.host + "/ws/chat/" + roomName + "/");
 
+        chatSocket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            displayMessage(data.sender, data.message);
+        };
 
-chatSocket.onclose = function(e) {
-    console.error('Socket закрыт');
-};
+        chatSocket.onclose = function () {
+            console.log("WebSocket закрыт");
+        };
 
-document.getElementById("send-button").addEventListener("click", function () {
-    const inputField = document.getElementById("message-input");
-    const message = inputField.value;
-    if (message.trim() !== "") {
-        chatSocket.send(JSON.stringify({
-            'sender': userName,
-            'message': message
-        }));
-        inputField.value = "";
+        document.getElementById("send-button").onclick = function () {
+            const inputField = document.getElementById("message-input");
+            const message = inputField.value;
+            if (message.trim() !== "") {
+                chatSocket.send(JSON.stringify({
+                    sender: userName,
+                    message: message
+                }));
+                inputField.value = "";
+            }
+        };
     }
-});
 
-// Функция для отображения сообщения
-function displayMessage(sender, message) {
-    const messagesContainer = document.getElementById("chat-messages");
-    const messageElement = document.createElement("div");
-    messageElement.classList.add("message");
-    messageElement.textContent = sender + ": " + message;
-    messagesContainer.appendChild(messageElement);
-    // Прокрутка вниз
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-}
+    function displayMessage(sender, message) {
+        const container = document.getElementById("chat-messages");
+        const el = document.createElement("div");
+        el.className = "message";
+        el.textContent = `${sender}: ${message}`;
+        container.appendChild(el);
+        container.scrollTop = container.scrollHeight;
+    }
 
-// Пример переключения чатов по кнопкам в сайдбаре
-const chatButtons = document.querySelectorAll('.chat-btn');
-chatButtons.forEach(function(button) {
-    button.addEventListener('click', function () {
-        // Удаляем класс active у всех кнопок
-        chatButtons.forEach(btn => btn.classList.remove('active'));
-        // Добавляем класс active к выбранной
-        this.classList.add('active');
-        // Получаем data-chat значение для дальнейшей логики переключения комнаты
-        const chatType = this.getAttribute('data-chat');
-        document.getElementById("chat-title").textContent = chatType === "group"
-            ? "🌿 Группа: Эко-проект"
-            : "👤 Личный чат: Алия";
-        // Здесь можно добавить логику для переключения подключения к другому WebSocket эндпоинту
+    // Обработчики кнопок переключения чатов
+    const chatButtons = document.querySelectorAll(".chat-btn");
+    chatButtons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            chatButtons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const chatType = btn.getAttribute("data-chat");
+            currentRoom = chatType === "group" ? "eco_project" : "user_aliya";
+
+            document.getElementById("chat-title").textContent = chatType === "group"
+                ? "🌿 Группа: Эко-проект"
+                : "👤 Личный чат: Алия";
+
+            // Подключение к WebSocket-комнате
+            connectToRoom(currentRoom);
+        });
     });
-});
 
-chatSocket.send(JSON.stringify({
-    'sender': userName,
-    'message': message
-}));
-console.log("Сообщение отправлено:", message);
+    // Стартовое подключение
+    connectToRoom(currentRoom);
+});
