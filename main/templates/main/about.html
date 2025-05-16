@@ -4,23 +4,20 @@
     <link rel="stylesheet" href="{%static 'style.css'%}">
     <link rel="stylesheet" href="{%static 'register.css'%}">
     <link rel="stylesheet" href="{%static 'about.css'%}">
-    <link rel="stylesheet" href="{%static 'team.css'%}"> <!-- новый CSS -->
+    <link rel="stylesheet" href="{%static 'team.css'%}"> 
 {%endblock%}
 {%block content%}
     <div class="team-detail-page">
 
-        <!-- Верхнее изображение -->
         <div class="team-cover">
           <img src="{{proj.image.url}}" alt="Project Cover">
         </div>
 
-        <!-- Название и описание -->
         <div class="team-content">
           <h2>{{proj.title}}</h2>
           <p>{{proj.description}}</p>
         </div>
 
-        <!-- Участники -->
         <div class="team-members">
           <h4>Участники команды:</h4>
           <div class="avatars">
@@ -30,12 +27,10 @@
           </div>
         </div>
 
-        <!-- Кнопка -->
         {%if request.user in proj.participants.all%}
         {%else%}
         <a href="{%url 'joinproj' proj.id%}" class="join-btn">Присоединиться к команде</a>
         {%endif%}
-        <!-- Чат -->
         <div class="chat-widget">
           <div class="chat-header">Чат команды</div>
           <div class="chat-messages">
@@ -53,6 +48,14 @@
             </form>
           </div>
         </div>
-
+        <div class="project-author-card">
+          <h4>Создатель проекта</h4>
+          <div class="author-info">
+            <a href="">
+              <img src="avatars\charity.jpg" alt="Автор" class="author-avatar">
+              <span class="author-username">DUUUDe</span>
+            </a>
+          </div>
+        </div>
     </div>
 {%endblock%}
